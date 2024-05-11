@@ -1,21 +1,21 @@
 import express from 'express';
 import cors from 'cors';
-import data from './data.js';
+import curentUserRouts from './routes/curentUser.routs.js';
+import tweetsRouts from './routes/tweets.routes.js';
 
-const PORT = 5000
+
+const PORT = 3000
+
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send("<h1>Bonjour client moi c'est le seurveur</h1>");
-});
-
-app.get('/personne', (req, res) => {
-  res.json(data);
-});
+app.use('/', curentUserRouts);
+app.use('/', tweetsRouts);
 
 
 app.listen(PORT, () => {
   console.log(`Notre serveur est lancé avec succès au port ${PORT}`);
 });
+
